@@ -1,9 +1,6 @@
 Aimsinfosoft DeleteAccount
 ==========================
 
-Last tested on Magento2 version 2.3.5
-
-
 What I got so far:
 ----------
 
