@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Aimsinfosoft
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the aimsinfosoft.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.aimsinfosoft.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Aimsinfosoft
+ * @package     Aimsinfosoft_DeleteAccount
+ * @copyright   Copyright (c) Aimsinfosoft (https://www.aimsinfosoft.com)
+ * @license     https://www.aimsinfosoft.com/LICENSE.txt
+ */ -->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<body>
+		<referenceBlock name="customer_account_navigation">
+			<block class="Magento\Framework\View\Element\Html\Link\Current" name="customer-account-navigation-custom">
+				<arguments>
+					<argument name="path" xsi:type="string">deleteaccount/customer/index</argument>
+					<argument name="label" xsi:type="string">Delete Account</argument>
+				</arguments>
+			</block>
+		</referenceBlock>
+	</body>
+</page>

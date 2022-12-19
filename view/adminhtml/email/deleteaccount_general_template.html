@@ -1,0 +1,27 @@
+<!--@subject Delete account confirmation email  @-->
+<!--@vars {
+"var this.getUrl($store, 'admin')":"Warehouse Account URL",
+"var customer.email":"Customer Email",
+"var customer_name":"Customer Name"
+} @-->
+<div class="delete-account-email-template container">
+    <div class="message-container">
+        <div class="customer-name">
+            <div class="email-greetings">
+                <p>{{trans "Hi "}} {{var customer_name}},</p>
+            </div>
+        </div>
+        <div class="other-message-contect">
+            <div class="email-message">
+                <p>{{trans "You have Received This E-mail becuase we've been notified to delete your account from Default. After deleting your account, you will permanently loose your account and order confirmation store in Our Default "}}</p>
+            </div>
+            <div class="email-confirm-message">
+                <p>{{trans "I Understand this and confirm to "}}<a href="{{var confirm_url}}">Delete My Account!</a></p>
+            </div>
+        </div>    
+    </div>
+    <div class="email-thankyou">
+        <span>Thank you</span>
+    </div>    
+</div>
+

@@ -1,0 +1,21 @@
+<?php 
+$baseUrl = $block->getBaseUrl();
+?>
+<div class="delete-account-main">
+	<form method="POST" action="<?=$baseUrl;?>deleteaccount/Customer/Delete">
+		<input type="checkbox" id="confirm-delete" name="confirm-delete" value="1">
+		  <label for="confirm-delete"> Delete My Account</label><span style="color: RED;">*</span><br><br>
+		  <input type="submit" disabled class="action primary" id="delete-account" value="Submit">
+	</form>
+</div>
+<script type="text/javascript">
+        require(['jquery', 'jquery/ui'], function($){
+            jQuery(document).on('change','#confirm-delete',function() {
+            	if(jQuery('input[id="confirm-delete"]:checked').length > 0){
+            		jQuery('#delete-account').attr('disabled', false);
+            	}else{
+            		jQuery('#delete-account').attr('disabled', true);
+            	}
+            });
+        });    	
+</script>

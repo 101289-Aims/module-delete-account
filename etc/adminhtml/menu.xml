@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Aimsinfosoft
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the aimsinfosoft.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.aimsinfosoft.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Aimsinfosoft
+ * @package     Aimsinfosoft_DeleteAccount
+ * @copyright   Copyright (c) Aimsinfosoft (https://www.aimsinfosoft.com)
+ * @license     https://www.aimsinfosoft.com/LICENSE.txt
+ */ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../Backend/etc/menu.xsd">
+    <menu>
+        <add id="Aimsinfosoft_DeleteAccount::deleteaccount_configuration"
+             title="Deleted Customer Account History"
+             resource="Magento_Backend::content"
+             module="Aimsinfosoft_DeleteAccount"
+             sortOrder="1"
+             action="deletecustomer/grid"
+             parent="Magento_Customer::customer" />
+    </menu>
+</config>

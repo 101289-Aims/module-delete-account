@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<!--
+   /**
+   
+    * Aimsinfosoft
+   
+    *
+   
+    * NOTICE OF LICENSE
+   
+    *
+   
+    * This source file is subject to the aimsinfosoft.com license that is
+   
+    * available through the world-wide-web at this URL:
+   
+    * https://www.aimsinfosoft.com/LICENSE.txt
+   
+    *
+   
+    * DISCLAIMER
+   
+    *
+   
+    * Do not edit or add to this file if you wish to upgrade this extension to newer
+   
+    * version in the future.
+   
+    *
+   
+    * @category    Aimsinfosoft
+   
+    * @package     Aimsinfosoft_DeleteAccount
+   
+    * @copyright   Copyright (c) Aimsinfosoft (https://www.aimsinfosoft.com)
+   
+    * @license     https://www.aimsinfosoft.com/LICENSE.txt
+   
+    */ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+   <system>
+      <tab id="aimsconfigtab" translate="label" sortOrder="1">
+         <label>AimsInfosoft</label>
+      </tab>
+      <section id="deleteaccount" translate="label" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="1">
+         <class>separator-top</class>
+         <label>Delete Account</label>
+         <tab>aimsconfigtab</tab>
+         <resource>Aimsinfosoft_DeleteAccount::deleteaccount_configuration</resource>
+         <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+            <label>Configuration</label>
+            <field id="enable" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+               <label>Enable Module</label>
+               <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+            </field>
+            <field id="sendername" translate="label" type="select" sortOrder="2" showInDefault="1" showInWebsite="0" showInStore="0" >
+               <label>Email Sender</label>
+               <source_model>Magento\Config\Model\Config\Source\Email\Identity</source_model>
+            </field>
+            <field id="template" translate="label" type="select" sortOrder="3" showInDefault="1" showInWebsite="0" showInStore="0" >
+               <label>Email Template</label>
+               <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+            </field>
+         </group>
+      </section>
+   </system>
+</config>
