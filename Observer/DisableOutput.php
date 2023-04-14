@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Aimsinfosoft
  *
@@ -18,6 +19,7 @@
  * @copyright   Copyright (c) Aimsinfosoft (https://www.aimsinfosoft.com)
  * @license     https://www.aimsinfosoft.com/LICENSE.txt
  */
+
 declare(strict_types=1);
 
 namespace Aimsinfosoft\DeleteAccount\Observer;
@@ -56,7 +58,7 @@ class DisableOutput implements \Magento\Framework\Event\ObserverInterface
         \Magento\Framework\App\Config\ScopeConfigInterface $_scopeConfig,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magento\Framework\App\RequestInterface $request
-    ){
+    ) {
         $this->_config = $_config;
         $this->_scopeConfig = $_scopeConfig;
         $this->storeManager = $storeManager;
@@ -72,30 +74,30 @@ class DisableOutput implements \Magento\Framework\Event\ObserverInterface
         $scopeType = \Magento\Framework\App\Config\ScopeConfigInterface::SCOPE_TYPE_DEFAULT;
         $scopeCode = 0;
 
-        if($this->request->getParam(\Magento\Store\Model\ScopeInterface::SCOPE_STORE))
-        {
-            $scopeType = ScopeInterface::SCOPE_STORE;
-            $scopeCode = $this->storeManager->getStore($this->request->getParam(\Magento\Store\Model\ScopeInterface::SCOPE_STORE))->getCode();
-        }elseif($this->request->getParam(\Magento\Store\Model\ScopeInterface::SCOPE_WEBSITE))
-        {
-            $scopeType = ScopeInterface::SCOPE_WEBSITE;
-            $scopeCode = $this->storeManager->getWebsite($this->request->getParam(\Magento\Store\Model\ScopeInterface::SCOPE_WEBSITE))->getCode();
-        }
-        else
-        {
-            $scopeType = \Magento\Framework\App\Config\ScopeConfigInterface::SCOPE_TYPE_DEFAULT;
-            $scopeCode = 0;
-        }
-        $moduleConfig= $this->_scopeConfig->getValue(self::VENDOR_CONFIG, $scopeType);
+        //        if($this->request->getParam(\Magento\Store\Model\ScopeInterface::SCOPE_STORE))
+        //        {
+        //            $scopeType = ScopeInterface::SCOPE_STORE;
+        //            $scopeCode = $this->storeManager->getStore($this->request->getParam(\Magento\Store\Model\ScopeInterface::SCOPE_STORE))->getCode();
+        //        }elseif($this->request->getParam(\Magento\Store\Model\ScopeInterface::SCOPE_WEBSITE))
+        //        {
+        //            $scopeType = ScopeInterface::SCOPE_WEBSITE;
+        //            $scopeCode = $this->storeManager->getWebsite($this->request->getParam(\Magento\Store\Model\ScopeInterface::SCOPE_WEBSITE))->getCode();
+        //        }
+        //        else
+        //        {
+        //            $scopeType = \Magento\Framework\App\Config\ScopeConfigInterface::SCOPE_TYPE_DEFAULT;
+        //            $scopeCode = 0;
+        //        }
+        $moduleConfig = $this->_scopeConfig->getValue(self::VENDOR_CONFIG, $scopeType);
 
 
-        if((int)$moduleConfig == 0){
+        if ((int)$moduleConfig == 0) {
             $disable = true;
         }
 
         $moduleName = 'Aimsinfosoft_DeleteAccount';
         $outputPath = "advanced/modules_disable_output/$moduleName";
 
-        $this->_config->saveConfig($outputPath,$disable, $scopeType,$scopeCode);
+        $this->_config->saveConfig($outputPath, $disable, $scopeType, $scopeCode);
     }
 }

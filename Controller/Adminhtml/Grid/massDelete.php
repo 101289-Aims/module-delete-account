@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Aimsinfosoft
  *
@@ -18,27 +19,28 @@
  * @copyright   Copyright (c) Aimsinfosoft (https://www.aimsinfosoft.com)
  * @license     https://www.aimsinfosoft.com/LICENSE.txt
  */
+
 declare(strict_types=1);
 
 namespace Aimsinfosoft\DeleteAccount\Controller\Adminhtml\Grid;
- 
+
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Backend\App\Action\Context;
 use Magento\Ui\Component\MassAction\Filter;
 use Aimsinfosoft\DeleteAccount\Model\ResourceModel\DeletedCustomer\CollectionFactory;
- 
+
 class MassDelete extends \Magento\Backend\App\Action
 {
     /**
      * @var Filter
      */
     protected $filter;
- 
+
     /**
      * @var CollectionFactory
      */
     protected $collectionFactory;
- 
+
     /**
      * @param Context $context
      * @param Filter $filter
@@ -62,9 +64,9 @@ class MassDelete extends \Magento\Backend\App\Action
         foreach ($collection as $item) {
             $item->delete();
         }
- 
+
         $this->messageManager->addSuccess(__('A total of %1 record(s) have been deleted.', $collectionSize));
- 
+
         /** @var \Magento\Backend\Model\View\Result\Redirect $resultRedirect */
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
         return $resultRedirect->setPath('*/*/');

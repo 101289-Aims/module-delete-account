@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Aimsinfosoft
  *
@@ -23,8 +24,8 @@ namespace Aimsinfosoft\DeleteAccount\Model\ResourceModel;
 
 class DeletedCustomer extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 {
-    public function _construct(){
-        $this->_init("aims_deleted_customers","id");
+    public function _construct()
+    {
+        $this->_init("aims_deleted_customers", "id");
     }
 }
-?>

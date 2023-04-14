@@ -1,5 +1,5 @@
-<?xml version="1.0"?>
-<!--
+<?php
+
 /**
  * Aimsinfosoft
  *
@@ -18,14 +18,20 @@
  * @package     Aimsinfosoft_DeleteAccount
  * @copyright   Copyright (c) Aimsinfosoft (https://www.aimsinfosoft.com)
  * @license     https://www.aimsinfosoft.com/LICENSE.txt
- */ -->
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
-    <default>
-        <deleteaccount>
-            <general>
-                <enable>1</enable>
-                <customtext>Your account will be permanently deleted. Once you delete your account, there is no going back.</customtext>
-            </general>
-        </deleteaccount>
-    </default>
-</config>
+ */
+
+namespace Aimsinfosoft\DeleteAccount\Model\ResourceModel;
+
+class FeedBack extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
+{
+    public function __construct(
+        \Magento\Framework\Model\ResourceModel\Db\Context $context
+    ) {
+        parent::__construct($context);
+    }
+
+    protected function _construct()
+    {
+        $this->_init("aims_deleted_customers_feedback", "id");
+    }
+}

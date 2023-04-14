@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Aimsinfosoft
  *
@@ -17,7 +18,7 @@
  * @package     Aimsinfosoft_DeleteAccount
  * @copyright   Copyright (c) Aimsinfosoft (https://www.aimsinfosoft.com)
  * @license     https://www.aimsinfosoft.com/LICENSE.txt
- */ 
+ */
 \Magento\Framework\Component\ComponentRegistrar::register(
 	\Magento\Framework\Component\ComponentRegistrar::MODULE,
 	'Aimsinfosoft_DeleteAccount',

@@ -23,11 +23,11 @@
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
             <argument name="collections" xsi:type="array">
-                <item name="deletecustomer_grid_listing_data_source" xsi:type="string">Aimsinfosoft\DeleteAccount\Model\ResourceModel\Collection</item>
+                <item name="deletecustomer_grid_listing_data_source" xsi:type="string">Aimsinfosoft\DeleteAccount\Model\ResourceModel\Grid\Collection</item>
             </argument>
         </arguments>
     </type>
-    <virtualType name="Aimsinfosoft\DeleteAccount\Model\ResourceModel\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+    <virtualType name="Aimsinfosoft\DeleteAccount\Model\ResourceModel\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
         <arguments>
             <argument name="mainTable" xsi:type="string">aims_deleted_customers</argument>
             <argument name="resourceModel" xsi:type="string">Aimsinfosoft\DeleteAccount\Model\ResourceModel\DeletedCustomer</argument>

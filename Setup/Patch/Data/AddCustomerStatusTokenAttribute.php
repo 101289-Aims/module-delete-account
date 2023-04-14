@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Aimsinfosoft
  *
@@ -18,6 +19,7 @@
  * @copyright   Copyright (c) Aimsinfosoft (https://www.aimsinfosoft.com)
  * @license     https://www.aimsinfosoft.com/LICENSE.txt
  */
+
 declare(strict_types=1);
 
 namespace Aimsinfosoft\DeleteAccount\Setup\Patch\Data;
@@ -100,7 +102,7 @@ class AddCustomerStatusTokenAttribute implements DataPatchInterface, PatchRevert
             ]
         );
 
-        $attribute = $customerSetup->getEavConfig()->getAttribute(Customer::ENTITY,'token');
+        $attribute = $customerSetup->getEavConfig()->getAttribute(Customer::ENTITY, 'token');
         $attribute->addData([
             'attribute_set_id' => $attributeSetId,
             'attribute_group_id' => $attributeGroupId
@@ -120,7 +122,7 @@ class AddCustomerStatusTokenAttribute implements DataPatchInterface, PatchRevert
         /** @var CustomerSetup $customerSetup */
         $customerSetup = $this->customerSetupFactory->create(['setup' => $this->moduleDataSetup]);
         $customerSetup->removeAttribute(\Magento\Customer\Model\Customer::ENTITY, 'token');
-        
+
         $this->moduleDataSetup->getConnection()->endSetup();
     }
 
@@ -137,8 +139,6 @@ class AddCustomerStatusTokenAttribute implements DataPatchInterface, PatchRevert
      */
     public static function getDependencies()
     {
-        return [
-
-        ];
+        return [];
     }
 }

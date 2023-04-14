@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Aimsinfosoft
  *
@@ -18,12 +19,13 @@
  * @copyright   Copyright (c) Aimsinfosoft (https://www.aimsinfosoft.com)
  * @license     https://www.aimsinfosoft.com/LICENSE.txt
  */
+
 declare(strict_types=1);
 
 namespace Aimsinfosoft\DeleteAccount\Controller\Adminhtml\Grid;
 
 class Index extends \Magento\Backend\App\Action
-{	
+{
 	/**
 	 * @var PageFactory
 	 */
@@ -36,8 +38,7 @@ class Index extends \Magento\Backend\App\Action
 	public function __construct(
 		\Magento\Backend\App\Action\Context $context,
 		\Magento\Framework\View\Result\PageFactory $resultPageFactory
-	)
-	{
+	) {
 		parent::__construct($context);
 		$this->resultPageFactory = $resultPageFactory;
 	}

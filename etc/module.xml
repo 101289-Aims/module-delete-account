@@ -20,6 +20,9 @@
  * @license     https://www.aimsinfosoft.com/LICENSE.txt
  */ -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
-    <module name="Aimsinfosoft_DeleteAccount" setup_version="1.0.0">
+    <module name="Aimsinfosoft_DeleteAccount" setup_version="1.0.4">
+        <sequence>
+            <module name="Aimsinfosoft_Base"/>
+        </sequence>
     </module>
 </config>

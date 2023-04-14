@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 /**
  * Aimsinfosoft
  *
@@ -18,6 +19,7 @@
  * @copyright   Copyright (c) Aimsinfosoft (https://www.aimsinfosoft.com)
  * @license     https://www.aimsinfosoft.com/LICENSE.txt
  */
+
 declare(strict_types=1);
 
 namespace Aimsinfosoft\DeleteAccount\Setup;
@@ -35,92 +37,91 @@ class InstallSchema implements \Magento\Framework\Setup\InstallSchemaInterface
             $table = $installer->getConnection()->newTable(
                 $installer->getTable('aims_deleted_customers')
             )
-            ->addColumn(
-                'id',
-                Table::TYPE_INTEGER,
-                null,
-                [
-                    'identity'=>true,
-                    'unsigned'=>true,
-                    'nullable'=>false,
-                    'primary'=>true
-                ],
-                'ID'
+                ->addColumn(
+                    'id',
+                    Table::TYPE_INTEGER,
+                    null,
+                    [
+                        'identity' => true,
+                        'unsigned' => true,
+                        'nullable' => false,
+                        'primary' => true
+                    ],
+                    'ID'
                 )
-            ->addColumn(
-                'name',
-                Table::TYPE_TEXT,
-                255,
-                [
-                    'nullable'=>false,
-                    'default'=>''
-                ],
-                'Name'
+                ->addColumn(
+                    'name',
+                    Table::TYPE_TEXT,
+                    255,
+                    [
+                        'nullable' => false,
+                        'default' => ''
+                    ],
+                    'Name'
                 )
-            ->addColumn(
-                'email',
-                Table::TYPE_TEXT,
-                '2M',
-                [
-                    'nullbale'=>false,
-                    'default'=>''
-                ],
-                'Email'
-                )    
-            ->addColumn(
-                'group',
-                Table::TYPE_TEXT,
-                '2M',
-                [
-                    'nullbale'=>false,
-                    'default'=>''
-                ],
-                'Group'
+                ->addColumn(
+                    'email',
+                    Table::TYPE_TEXT,
+                    '2M',
+                    [
+                        'nullbale' => false,
+                        'default' => ''
+                    ],
+                    'Email'
                 )
-            ->addColumn(
-                'customer_since',
-                Table::TYPE_TIMESTAMP,
-                null,
-                [
-                    'nullable' => false, 
-                    'default' => ''
-                ],
-                'Customer Since'
+                ->addColumn(
+                    'group',
+                    Table::TYPE_TEXT,
+                    '2M',
+                    [
+                        'nullbale' => false,
+                        'default' => ''
+                    ],
+                    'Group'
                 )
-            ->addColumn(
-                'website',
-                Table::TYPE_TEXT,
-                '2M',
-                [
-                    'nullbale'=>false,
-                    'default'=>''
-                ],
-                'Website'
+                ->addColumn(
+                    'customer_since',
+                    Table::TYPE_TIMESTAMP,
+                    null,
+                    [
+                        'nullable' => false,
+                        'default' => ''
+                    ],
+                    'Customer Since'
                 )
-            ->addColumn(
-                'account_created_in',
-                Table::TYPE_TEXT,
-                '2M',
-                [
-                    'nullbale'=>false,
-                    'default'=>''
-                ],
-                'Account Created In'
+                ->addColumn(
+                    'website',
+                    Table::TYPE_TEXT,
+                    '2M',
+                    [
+                        'nullbale' => false,
+                        'default' => ''
+                    ],
+                    'Website'
                 )
-            ->addColumn(
-                'deleted_at',
-                Table::TYPE_TIMESTAMP,
-                null,
-                [
-                    'nullable' => false, 
-                    'default' => Table::TIMESTAMP_INIT
-                ],
-                'Deleted At'
+                ->addColumn(
+                    'account_created_in',
+                    Table::TYPE_TEXT,
+                    '2M',
+                    [
+                        'nullbale' => false,
+                        'default' => ''
+                    ],
+                    'Account Created In'
                 )
-            ->setOption('charset','utf8');
+                ->addColumn(
+                    'deleted_at',
+                    Table::TYPE_TIMESTAMP,
+                    null,
+                    [
+                        'nullable' => false,
+                        'default' => Table::TIMESTAMP_INIT
+                    ],
+                    'Deleted At'
+                )
+                ->setOption('charset', 'utf8');
             $installer->getConnection()->createTable($table);
         }
         $installer->endSetup();
     }
 }
-?>

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Aimsinfosoft
  *
@@ -45,4 +46,3 @@ class Collection extends AbstractCollection
         $this->_init(\Aimsinfosoft\DeleteAccount\Model\DeletedCustomer::class, DeletedCustomer::class);
     }
 }
-?>

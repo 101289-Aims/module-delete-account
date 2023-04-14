@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Aimsinfosoft
  *
@@ -21,13 +22,13 @@
 
 namespace Aimsinfosoft\DeleteAccount\Model\ResourceModel;
 
-class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection 
+class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection
 {
-	public function _construct(){
+	public function _construct()
+	{
 		$this->_init(
 			\Aimsinfosoft\DeleteAccount\Model\DeletedCustomer::class,
 			\Aimsinfosoft\DeleteAccount\Model\ResourceModel\DeletedCustomer::class
 		);
 	}
 }
-?>

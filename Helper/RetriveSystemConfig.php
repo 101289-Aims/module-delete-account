@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Aimsinfosoft
  *
@@ -18,6 +19,7 @@
  * @copyright   Copyright (c) Aimsinfosoft (https://www.aimsinfosoft.com)
  * @license     https://www.aimsinfosoft.com/LICENSE.txt
  */
+
 declare(strict_types=1);
 
 namespace Aimsinfosoft\DeleteAccount\Helper;
@@ -40,23 +42,54 @@ class RetriveSystemConfig extends AbstractHelper
      */
     public function __construct(
         Context $context,
-        EncryptorInterface $encryptor
-    )
-    {
+        EncryptorInterface $encryptor,
+        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
+        \Magento\Store\Model\StoreManagerInterface $storeManager
+    ) {
         parent::__construct($context);
         $this->encryptor = $encryptor;
+        $this->scopeConfig = $scopeConfig;
+        $this->storeManager = $storeManager;
     }
 
+    public function getConfigValue($field = false)
+    {
+        if ($field) {
+            return $this->scopeConfig
+                ->getValue(
+                    $field,
+                    \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
+                    $this->getStoreId()
+                );
+        } else {
+            return;
+        }
+    }
+
+    public function getStoreId()
+    {
+        return $this->storeManager->getStore()->getId();
+    }
+
+    public function getCustomText()
+    {
+        return  $this->getConfigValue('deleteaccount/general/customtext');
+    }
+
+    public function getCustomTextRequire()
+    {
+        return  $this->getConfigValue('deleteaccount/general/alertmessage');
+    }
     /*
      * @return string
      */
     public function getEMailSender($scope = ScopeConfigInterface::SCOPE_TYPE_DEFAULT)
     {
-        $senderIndent = $this->scopeConfig->getValue('deleteaccount/general/sendername',$scope);
+        $senderIndent = $this->scopeConfig->getValue('deleteaccount/general/sendername', $scope);
 
         $selectedIndentUrl = 'trans_email/ident_' . $senderIndent . '/name';
 
-        return $this->scopeConfig->getValue($selectedIndentUrl,\Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+        return $this->scopeConfig->getValue($selectedIndentUrl, \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
     }
 
     /*
@@ -64,12 +97,12 @@ class RetriveSystemConfig extends AbstractHelper
      */
     public function getEMailId($scope = ScopeConfigInterface::SCOPE_TYPE_DEFAULT)
     {
-        $emailIndent = $this->scopeConfig->getValue('deleteaccount/general/sendername',$scope);
+        $emailIndent = $this->scopeConfig->getValue('deleteaccount/general/sendername', $scope);
 
         $emailIndentUrl = 'trans_email/ident_' . $emailIndent . '/email';
 
-        return $this->scopeConfig->getValue($emailIndentUrl,\Magento\Store\Model\ScopeInterface::SCOPE_STORE);
-    } 
+        return $this->scopeConfig->getValue($emailIndentUrl, \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+    }
 
     /*
      * @return string
@@ -81,5 +114,4 @@ class RetriveSystemConfig extends AbstractHelper
             $scope
         );
     }
-
 }

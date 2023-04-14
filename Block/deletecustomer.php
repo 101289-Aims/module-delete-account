@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Aimsinfosoft
  *
@@ -18,18 +19,29 @@
  * @copyright   Copyright (c) Aimsinfosoft (https://www.aimsinfosoft.com)
  * @license     https://www.aimsinfosoft.com/LICENSE.txt
  */
+
 declare(strict_types=1);
 
 namespace Aimsinfosoft\DeleteAccount\Block;
 
-class deletecustomer extends \Magento\Framework\View\Element\Template
+
+use Aimsinfosoft\DeleteAccount\Helper\RetriveSystemConfig;
+
+class Deletecustomer extends \Magento\Framework\View\Element\Template
 {
+	/**
+	 * @var RetriveSystemConfig
+	 */
+	protected $systemConfigData;
+
 	/*
 	 * Delete Customer Block Constructor
 	 */
-	public function __construct(\Magento\Framework\View\Element\Template\Context $context)
+	public function __construct(\Magento\Framework\View\Element\Template\Context $context, RetriveSystemConfig $systemConfigData)
 	{
 		parent::__construct($context);
+
+		$this->systemConfigData = $systemConfigData;
 	}
 
 	/*
@@ -46,8 +58,17 @@ class deletecustomer extends \Magento\Framework\View\Element\Template
 	 * @return string
 	 */
 	public function getBaseUrl()
-    {
-        return $this->_storeManager->getStore()->getBaseUrl();
-    }
+	{
+		return $this->_storeManager->getStore()->getBaseUrl();
+	}
 
+	public function getCustomText()
+	{
+		return $this->systemConfigData->getCustomText();
+	}
+
+	public function getCustomTextRequire()
+	{
+		return $this->systemConfigData->getCustomTextRequire();
+	}
 }

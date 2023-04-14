@@ -20,7 +20,10 @@
  * @license     https://www.aimsinfosoft.com/LICENSE.txt
  */ -->
  <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd"> 
-	<update handle="customer_account"/> 
+	<update handle="customer_account"/>
+	<head>
+		<script src="Aimsinfosoft_DeleteAccount::js/deleteaccount.js"/>
+	</head>
 	<body> 
 		<referenceBlock name="page.main.title"> 
 			<action method="setPageTitle"> 
@@ -28,7 +31,7 @@
 			</action> 
 		</referenceBlock> 
 		<referenceContainer name="content"> 
-			<block class="Magento\Framework\View\Element\Template" name="delete_customer" template="Aimsinfosoft_DeleteAccount::deletecustomer.phtml"> 
+			<block class="Aimsinfosoft\DeleteAccount\Block\Deletecustomer" name="delete_customer" template="Aimsinfosoft_DeleteAccount::deletecustomer.phtml">
 			</block> 
 		</referenceContainer> 
 	</body> 

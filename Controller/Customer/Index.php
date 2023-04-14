@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Aimsinfosoft
  *
@@ -18,16 +19,17 @@
  * @copyright   Copyright (c) Aimsinfosoft (https://www.aimsinfosoft.com)
  * @license     https://www.aimsinfosoft.com/LICENSE.txt
  */
+
 declare(strict_types=1);
 
-namespace Aimsinfosoft\DeleteAccount\Controller\Customer;  
+namespace Aimsinfosoft\DeleteAccount\Controller\Customer;
 
 use Magento\Framework\App\Action\Context;
 use Magento\Customer\Model\Session;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Store\Model\StoreManagerInterface;
 
-class Index extends \Magento\Framework\App\Action\Action 
+class Index extends \Magento\Framework\App\Action\Action
 {
 
 	/**
@@ -63,28 +65,25 @@ class Index extends \Magento\Framework\App\Action\Action
 		$this->_customerSession = $customerSession;
 		$this->resultRedirect = $result;
 		$this->_storeManager = $storeManager;
-
 	}
 	/*
 	 * Customer Frontend Delete Account Page
 	 */
-	public function execute() 
-	{ 
-		try{
+	public function execute()
+	{
+		try {
 			//Check if Customer is Not logged in, Redirect to Login Page
-			if(!$this->_customerSession->isLoggedIn()) {
+			if (!$this->_customerSession->isLoggedIn()) {
 				$baseUrl = $this->_storeManager->getStore()->getBaseUrl();
 				$resultRedirect = $this->resultRedirectFactory->create();
 				$resultRedirect->setUrl($baseUrl . 'customer/account/login');
 				return $resultRedirect;
-            } else {
-				$this->_view->loadLayout(); 
-				$this->_view->renderLayout(); 
+			} else {
+				$this->_view->loadLayout();
+				$this->_view->renderLayout();
 			}
+		} catch (Exception $e) {
+			echo 'Message: ' . $e->getMessage();
 		}
-		catch(Exception $e) {
-			echo 'Message: ' .$e->getMessage();
-	   }	
-	} 
-} 
-?>
+	}
+}

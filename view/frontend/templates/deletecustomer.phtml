@@ -1,21 +1,20 @@
 <?php 
 $baseUrl = $block->getBaseUrl();
+$customText = $block->getCustomText();
+$customTextRequire = $block->getCustomTextRequire();
 ?>
 <div class="delete-account-main">
 	<form method="POST" action="<?=$baseUrl;?>deleteaccount/Customer/Delete">
-		<input type="checkbox" id="confirm-delete" name="confirm-delete" value="1">
-		  <label for="confirm-delete"> Delete My Account</label><span style="color: RED;">*</span><br><br>
-		  <input type="submit" disabled class="action primary" id="delete-account" value="Submit">
+		<input type="checkbox" id="confirm-delete" name="confirm-delete" value="1" style="display: none" checked="checked">
+        <input type="button" class="action primary" id="delete-account" value="Delete your account">
+
+        <br><br>
+        <p> <?=$block->getCustomText();?></p>
+        <br/><br/>
+        <textarea name="feedback" id="feedback" style="display: none"></textarea>
 	</form>
 </div>
-<script type="text/javascript">
-        require(['jquery', 'jquery/ui'], function($){
-            jQuery(document).on('change','#confirm-delete',function() {
-            	if(jQuery('input[id="confirm-delete"]:checked').length > 0){
-            		jQuery('#delete-account').attr('disabled', false);
-            	}else{
-            		jQuery('#delete-account').attr('disabled', true);
-            	}
-            });
-        });    	
-</script>
+<div id="popup-modal" style="display:none;">
+    <textarea name="customtext" id="customtext" required></textarea>
+</div>
+<input type="text" style="display: none;" value="<?= $customTextRequire;?>" id="customTextRequire">

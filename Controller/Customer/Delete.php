@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Aimsinfosoft
  *
@@ -18,6 +19,7 @@
  * @copyright   Copyright (c) Aimsinfosoft (https://www.aimsinfosoft.com)
  * @license     https://www.aimsinfosoft.com/LICENSE.txt
  */
+
 declare(strict_types=1);
 
 namespace Aimsinfosoft\DeleteAccount\Controller\Customer;
@@ -33,8 +35,9 @@ use Magento\Store\Model\StoreManagerInterface;
 use Aimsinfosoft\DeleteAccount\Helper\RetriveSystemConfig;
 use Magento\Framework\Math\Random;
 use Magento\Customer\Api\CustomerRepositoryInterface;
+use Aimsinfosoft\DeleteAccount\Model\FeedBackFactory;
 
-class Delete extends \Magento\Framework\App\Action\Action
+class Delete extends Action
 {
 
     /**
@@ -46,7 +49,7 @@ class Delete extends \Magento\Framework\App\Action\Action
      * @var StateInterface
      */
     protected $inlineTranslation;
-    
+
     /**
      * @var Escaper
      */
@@ -83,6 +86,10 @@ class Delete extends \Magento\Framework\App\Action\Action
     private $customerRepositoryInterface;
 
     /**
+     * @var FeedBackFactory
+     */
+    protected $_feedback;
+    /**
      * Delete User Contructors
      * @param Context $context
      * @param ResultFactory $result
@@ -105,9 +112,9 @@ class Delete extends \Magento\Framework\App\Action\Action
         StoreManagerInterface $storeManager,
         RetriveSystemConfig $systemConfigData,
         Random $mathRandom,
-        CustomerRepositoryInterface $customerRepositoryInterface
-    )
-    {
+        CustomerRepositoryInterface $customerRepositoryInterface,
+        FeedBackFactory $feedBackFactory
+    ) {
         parent::__construct($context);
         $this->resultRedirect = $result;
         $this->inlineTranslation = $inlineTranslation;
@@ -118,6 +125,7 @@ class Delete extends \Magento\Framework\App\Action\Action
         $this->systemConfigData = $systemConfigData;
         $this->mathRandom = $mathRandom;
         $this->customerRepositoryInterface = $customerRepositoryInterface;
+        $this->_feedback = $feedBackFactory;
     }
 
     /*
@@ -125,8 +133,8 @@ class Delete extends \Magento\Framework\App\Action\Action
      * @return ResultFactory
      */
     public function execute()
-    {   
-        try{
+    {
+        try {
             $resultRedirect = $this->resultRedirect->create(ResultFactory::TYPE_REDIRECT);
             $resultRedirect->setUrl($this->_redirect->getRefererUrl());
             $postData = $this->getRequest()->getParams();
@@ -137,17 +145,29 @@ class Delete extends \Magento\Framework\App\Action\Action
             $emailSender = $this->systemConfigData->getEMailSender();
             $emailId = $this->systemConfigData->getEMailId();
             $emailTemplate = $this->systemConfigData->getEmailTemplate();
+            $customText = $this->systemConfigData->getCustomText();
             $newCustomerToken = $this->mathRandom->getUniqueHash();
             $customer = $this->customerRepositoryInterface->getById($customerId);
             $customer->setCustomAttribute('token', $newCustomerToken);
             $this->customerRepositoryInterface->save($customer);
-
+            $this->customerSession->setFeedBack($postData['feedback']);
             //Send Email To Customer
             $this->inlineTranslation->suspend();
+            $feedback_id = '';
+            if ($postData['feedback']) {
+                $feedback = $this->_feedback->create();
+                $feedback->addData([
+                    "customer_id" => $this->customerSession->getCustomer()->getId(),
+                    "feedback" => $postData['feedback']
+                ]);
+                $feedback->save();
+                $feedback_id = $feedback->getId();
+            }
             $templateVars = array(
-                    'customer_name' => $customerName,
-                    'confirm_url'   => $baseUrl.'deleteaccount/Customer/Confirm?id='.$customerId.'&&token='.$newCustomerToken
-                );	
+                'customer_name' => $customerName,
+                'confirm_url'   => $baseUrl . 'deleteaccount/Customer/Confirm?id=' . $customerId . '&&token=' . $newCustomerToken . '&&feedback_id=' . $feedback_id
+            );
+
             $sender = [
                 'name' => $this->escaper->escapeHtml($emailSender),
                 'email' => $this->escaper->escapeHtml($emailId),
@@ -166,11 +186,10 @@ class Delete extends \Magento\Framework\App\Action\Action
                 ->getTransport();
             $transport->sendMessage();
             $this->inlineTranslation->resume();
-            $this->messageManager->addSuccess( __('Please Check Your Registered Email id to Confirm and Delete Your Account Parmanently') );
+            $this->messageManager->addSuccess(__('Please Check Your Registered Email id to Confirm and Delete Your Account Parmanently'));
             return $resultRedirect;
-        } 
-        catch(Exception $e) {
-            echo 'Message: ' .$e->getMessage();
+        } catch (Exception $e) {
+            echo 'Message: ' . $e->getMessage();
         }
     }
 }
